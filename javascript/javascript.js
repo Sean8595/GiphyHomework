@@ -1,6 +1,6 @@
 $(document).ready(function(){
 
-var topicArray = ["Dipper","Mable","Sues","Gruncle Stan" ]
+var topicArray = ["Dipper Pines","Mable Pines","Soos","Gruncle Stan" ]
 function renderButtons() {
     $("#buttons-view").empty();
     for (var i = 0; i < topicArray.length; i++) {
@@ -41,25 +41,36 @@ $(".Movie").on("click",function(){
 //pulls data from giphy
 for (i = 0; i < 10; i++) {
     var image = $("<img>")
+    //ajay helped me a lot with this section!
     var stillImgURL = data.data[i].images.fixed_height_small_still.url;
     var animateImgURL = data.data[i].images.fixed_height_small.url;
-    var rating = data.data[i].rating
+    // var rating = data.data[i].rating
 
     image.attr("src", stillImgURL).addClass("gif");
     image.attr("data-state", "still");
     image.attr("data-animate", animateImgURL);
     image.attr("data-still", stillImgURL);
-
-    console.log(animateImgURL);
-
+    image.addClass("borders");
     gifDiv.append(image);
-    gifDiv.append(rating);
+    // gifDiv.append(rating);
  $("#movies-view").prepend(gifDiv)
 }
 
+//gets it animated, took this from the activity 
+$(document).on("click", ".gif", function () {
+var state = $(this).attr("data-state");
+var animateSrc = $(this).attr("data-animate");
+var stillSrc = $(this).attr("data-still");
+if (state === "still") {
+    $(this).attr("src", animateSrc);
+    $(this).attr("data-state", "animate");
+} else if (state === "animate") {
+    $(this).attr("src", stillSrc);
+    $(this).attr("data-state", "still");
+}
     console.log(rating)
 //apends the previous information
   });
 
 })
-})
+})})
