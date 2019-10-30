@@ -1,5 +1,5 @@
 $(document).ready(function() {
-  var topicArray = ["Dipper Pines", "Mable Pines", "Soos", "Gruncle Stan", "Waddles","Bill Cypher","Lil Gideon"];
+  var topicArray = ["Dipper Pines", "Mable Pines", "Soos", "Gruncle Stan", "Waddles", "Bill Cypher",];
   function renderButtons() {
     $("#buttons-view").empty();
     for (var i = 0; i < topicArray.length; i++) {
@@ -16,12 +16,11 @@ $(document).ready(function() {
     event.preventDefault();
     var topic = $("#movie-input").val();
     topicArray.push(topic);
-    console.log(topicArray)
+    console.log(topic)
     renderButtons();
   });
   // This line grabs the input from the textbox
-
-$(".Movie").on("click", function (){
+  $(document).on("click", ".Movie", function(){
     //setting variables and getting the API in place
     var gifs = $(this).attr("data-name");
     var queryURL =
@@ -30,6 +29,7 @@ $(".Movie").on("click", function (){
       "&limit=25&offset=0&rating=G&lang=en";
 
     console.log("clicked");
+
     $.ajax({
       url: queryURL,
       method: "GET"
@@ -42,6 +42,7 @@ $(".Movie").on("click", function (){
         //ajay helped me a lot with this section!
         var stillImgURL = data.data[i].images.fixed_height_small_still.url;
         var animateImgURL = data.data[i].images.fixed_height_small.url;
+        var rating = data.data[i].rating
 
         image.attr("src", stillImgURL).addClass("gif");
         image.attr("data-state", "still");
@@ -49,7 +50,7 @@ $(".Movie").on("click", function (){
         image.attr("data-still", stillImgURL);
         image.addClass("borders");
         gifDiv.append(image);
-   
+        gifDiv.append("Rating is " + rating);
         $("#movies-view").prepend(gifDiv);
       }
 
@@ -65,8 +66,9 @@ $(".Movie").on("click", function (){
           $(this).attr("src", stillSrc);
           $(this).attr("data-state", "still");
         }
+        console.log(rating);
         //apends the previous information
       });
     });
-  
-  })})
+  });
+});
