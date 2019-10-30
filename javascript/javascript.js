@@ -34,6 +34,7 @@ $(document).ready(function() {
       url: queryURL,
       method: "GET"
     }).then(function(data) {
+     
       var gifDiv = $("<div class='gif'>");
 
       //pulls data from giphy
@@ -54,7 +55,11 @@ $(document).ready(function() {
         $("#movies-view").prepend(gifDiv);
       }
 
-      //gets it animated, took this from the activity
+      
+    });
+  });
+});
+//gets it animated, took this from the activity
       $(document).on("click", ".gif", function() {
         var state = $(this).attr("data-state");
         var animateSrc = $(this).attr("data-animate");
@@ -69,6 +74,3 @@ $(document).ready(function() {
         console.log(rating);
         //apends the previous information
       });
-    });
-  });
-});
