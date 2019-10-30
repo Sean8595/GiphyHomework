@@ -21,7 +21,7 @@ $(document).ready(function() {
   });
   // This line grabs the input from the textbox
 
-function display() {
+$(".Movie").on("click", function (){
     //setting variables and getting the API in place
     var gifs = $(this).attr("data-name");
     var queryURL =
@@ -68,7 +68,5 @@ function display() {
         //apends the previous information
       });
     });
-    display()
-  $(".Movie").on("click",function(){
-    display()
-  })}})
+  
+  })})
